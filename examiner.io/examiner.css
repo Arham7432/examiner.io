@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+    width: 2px;
+    background-color: black;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: "Host Grotesk", sans-serif;
+    background-color: #111;
+    color: rgb(223 225 230);
+    overflow: hidden;
+}
+
+*::selection {
+    color: #111;
+    background-color: gainsboro;
+    border-radius: 20px;
+}
+
+.none {
+    display: none !important;
+}
+
+header {
+    padding: 20px 30px;
+    text-transform: lowercase;
+    font-weight: 900;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header h2 {
+    font-size: 25px;
+    cursor: default;
+}
+
+#hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: default;
+}
+
+#hero h1 {
+    text-transform: uppercase;
+    font-weight: 1000;
+    font-size: 80px;
+    font-family: montserrat;
+    position: relative;
+}
+
+#hero h3 {
+    font-weight: 500;
+    font-size: 30px;
+    color: gray;
+}
+
+#begin-btn {
+    font-family: montserrat;
+    font-weight: 700;
+    border-radius: 7px;
+    padding: 8px 30px;
+    margin-top: 20px;
+    transition: all 0.3s;
+    background-color: white;
+    color: #222;
+}
+
+#begin-btn:hover {
+    scale: 1.1;
+}
+
+#begin-btn:active {
+    scale: 1;
+    background-color: rgb(236, 236, 254);
+}
+
+.sign-up-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.sign-in-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+#signing-stuffs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#signing-stuffs h2 {
+    font-size: 30px;
+    font-weight: 800;
+    font-family: montserrat;
+    margin-bottom: 30px;
+}
+
+#signing-stuffs input {
+    color: gainsboro;
+    background: transparent;
+    padding: 10px 3px;
+    width: 30%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.265);
+    font-size: 14px;
+    text-transform: lowercase;
+    margin-bottom: 30px;
+    transition: all 0.4s;
+    font-family: montserrat;
+}
+
+#signing-stuffs input:focus {
+    border-bottom: 1px solid gray;
+}
+
+#sign-up-btn,
+#sign-in-btn {
+    border-radius: 10px;
+    padding: 9px;
+    width: 30%;
+    font-weight: 600;
+    transition: all 0.3s;
+    background-color: #fff;
+    color: black;
+
+    /* background-color: #2726265c;
+    color: #4b4a4a; */
+}
+
+#sign-up-btn:active,
+#sign-in-btn:active {
+    background-color: rgb(236, 236, 254);
+}
+
+#hero,
+#sign-up-form,
+#sign-in-form {
+    transition: opacity 0.5s ease-in-out;
+}

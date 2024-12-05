@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/5691/5691365.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.min.css">
+    <link rel="stylesheet" href="examiner.css">
+    <title>examiner.io | Interactive Quiz Platform</title>
+    <style>
+        @media screen and (min-width:1600px) {
+
+            header {
+                padding: 20px 15vw;
+            }
+
+            #hero h1 {
+                font-size: 5vw;
+            }
+
+            #hero h3 {
+                font-size: 45px;
+            }
+
+            #begin-btn {
+                font-size: 28px;
+                padding: 8px 32px;
+                border-radius: 13px;
+            }
+
+            #signing-stuffs input,
+            #sign-up-btn,
+            #sign-in-btn {
+                width: 20%;
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            #hero h1 {
+                font-size: 4.4rem;
+                line-height: 1.1;
+                margin: 0px 12px;
+            }
+
+            #hero h3 {
+                margin: 20px 0px;
+                font-weight: 500;
+            }
+
+            #signing-stuffs input,
+            #sign-up-btn,
+            #sign-in-btn {
+                width: 80%;
+            }
+
+            #signing-stuffs h2 {
+                font-size: 30px;
+                font-weight: 700;
+            }
+        }
+
+        @media screen and (max-width:430px) {
+            #hero h1 {
+                font-size: 4.2rem;
+            }
+
+            #hero h3 {
+                font-size: 28px;
+            }
+        }
+
+        @media screen and (max-width:370px) {
+            #hero h1 {
+                font-size: 3.7rem;
+            }
+
+            #hero h3 {
+                font-size: 23px;
+            }
+        }
+
+        @media screen and (max-width:400px) {
+            #hero h1 {
+                font-size: 3.6rem;
+            }
+
+            #hero h3 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>EXAMINER.<span style="font-weight: 400;">IO</span></h2>
+        <a target="_blank" href="https://github.com/Arham7432">
+            <div class="group relative">
+                <button>
+                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"
+                        fill="none" viewBox="0 0 24 24" class="w-8 hover:scale-125 duration-200 hover:stroke-blue-500">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </button>
+                <span style="color: black;" class="absolute top-[110%] left-[50%] -translate-x-[50%] 
+                z-20 origin-top scale-0 px-3 rounded-lg border 
+                border-gray-300 bg-white py-2 text-sm font-bold 
+                shadow-md transition-all duration-300 ease-in-out 
+                group-hover:scale-100">
+                    GitHub
+                </span>
+            </div>
+        </a>
+    </header>
+
+    <main>
+        <div id="hero">
+            <h1>Quiz. Click. Conquer.</h1>
+            <h3>welcome to examiner.io</h3>
+            <button id="begin-btn" onclick="toSignUp()">Begin Quiz</button>
+        </div>
+
+        <div id="signing-stuffs">
+            <div id="sign-up-form" class="sign-up-form">
+                <h2>Create Account.</h2>
+                <input id="ip_1" spellcheck="false" type="text" placeholder="enter fullname" required
+                    autocomplete="off">
+                <input id="ip_2" spellcheck="false" type="password" placeholder="create password" required
+                    maxlength="8">
+                <button type="submit" id="sign-up-btn" onclick="toLoginPage()">Sign Up</button>
+            </div>
+
+            <div id="sign-in-form" class="sign-in-form">
+                <h2>Login to continue.</h2>
+                <input id="ip_3" spellcheck="false" type="text" placeholder="enter fullname" required
+                    autocomplete="off">
+                <input id="ip_4" spellcheck="false" type="password" placeholder="enter password" required maxlength="8">
+                <button id="sign-in-btn" onclick="toDashboard()">Login</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var hero = document.querySelector("#hero");
+        var signUp = document.querySelector("#sign-up-form");
+        var signIn = document.querySelector("#sign-in-form");
+
+        var field_1 = document.querySelector("#ip_1");
+        var field_2 = document.querySelector("#ip_2");
+        var field_3 = document.querySelector("#ip_3");
+        var field_4 = document.querySelector("#ip_4");
+
+        function toSignUp() {
+            document.title = "examiner.io - Sign Up";
+            hero.style.opacity = "0";
+            setTimeout(() => {
+                hero.style.display = "none";
+            }, 500);
+        }
+
+        function toLoginPage() {
+            document.title = "examiner.io - Sign In";
+            if (field_1.value.trim() !== "" && field_2.value.trim() !== "") {
+                signUp.style.display = "none";
+                signIn.style.display = "flex";
+                localStorage.setItem("fullname", field_1.value.trim());
+                localStorage.setItem("password", field_2.value.trim());
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please fill in all fields!"
+                });
+            }
+        }
+
+        function toDashboard() {
+            var savedFullname = localStorage.getItem("fullname");
+            var savedPassword = localStorage.getItem("password");
+
+            if (
+                field_3.value.trim() === savedFullname &&
+                field_4.value.trim() === savedPassword
+            ) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Welcome",
+                    text: "Redirecting to your dashboard...",
+                    showConfirmButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    location.href = "category.html";
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Retry",
+                    text: "Invalid Name or Password!",
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

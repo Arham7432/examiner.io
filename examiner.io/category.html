@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/5691/5691365.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="examiner.css">
+    <title>examiner.io - Dashboard</title>
+    <style>
+        #category-cont {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #select {
+            height: 80%;
+            width: 90%;
+            background: #171717;
+            margin-top: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .heading-section {
+            display: flex;
+            align-items: center;
+            padding: 0px 20px;
+            height: 15%;
+            font-size: 25px;
+            font-weight: 700;
+            font-family: montserrat;
+        }
+
+        #selection-div {
+            max-height: 80%;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        #selection-div .quiz {
+            background-color: #000;
+            padding: 25px;
+            margin: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        #selection-div .quiz h2 {
+            font-weight: 900;
+            margin: 0;
+        }
+
+        #selection-div .quiz p {
+            font-size: 14px;
+            color: #aaa;
+            font-family: montserrat;
+            margin: 0;
+        }
+
+        .quiz img {
+            width: 35px;
+        }
+
+        .quiz .lock-icon {
+            font-size: 20px;
+            color: #bbb;
+        }
+
+        .quiz>div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz .lock-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(128, 128, 128, 0.097);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            color: rgba(220, 220, 220, 0.173);
+            transition: all 0.3s;
+        }
+
+        .quiz .lock-icon:hover {
+            background-color: rgb(30, 29, 29);
+        }
+
+        .hoverable {
+            transition: all 0.2s;
+            border: 1px solid transparent !important;
+        }
+
+        .hoverable:hover {
+            background-color: #2726265c !important;
+            border: 1px solid rgba(255, 255, 255, 0.177) !important;
+        }
+
+        .constraints {
+            font-family: montserrat;
+            display: flex;
+            color: rgba(159, 158, 158, 0.664);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        @media screen and (min-width:1600px) {
+
+            main {
+                width: 70%;
+                margin: auto;
+            }
+
+            header {
+                padding: 20px 15vw;
+            }
+
+        }
+
+
+        @media screen and (max-width:600px) {
+            #selection-div .quiz {
+                flex-direction: column;
+            }
+
+            .quiz>div {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .constraints {
+                text-align: center;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <h2 style="cursor: pointer;">EXAMINER.<span style="font-weight: 400;">IO</span></h2>
+        </a>
+        <a target="_blank" href="https://github.com/Arham7432">
+            <div class="group relative">
+                <button>
+                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"
+                        fill="none" viewBox="0 0 24 24" class="w-8 hover:scale-125 duration-200 hover:stroke-blue-500">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </button>
+                <span style="color: black;" class="absolute top-[110%] left-[50%] -translate-x-[50%] 
+                    z-20 origin-top scale-0 px-3 rounded-lg border 
+                    border-gray-300 bg-white py-2 text-sm font-bold 
+                    shadow-md transition-all duration-300 ease-in-out 
+                    group-hover:scale-100">GitHub</span>
+            </div>
+        </a>
+    </header>
+
+    <main>
+        <div id="category-cont">
+            <div id="select">
+                <div class="heading-section">
+                    <h1>Select Category.</h1>
+                </div>
+                <div id="selection-div">
+                    <a href="htmlQuiz.html">
+                        <div class="quiz hoverable">
+                            <div>
+                                <img src="assets/html.svg" alt="HTML">
+                                <h2>HTML</h2>
+                                <p>Test your knowledge of HTML, the standard markup language for web pages.</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="cssQuiz.html">
+                        <div class="quiz hoverable">
+                            <div>
+                                <img src="assets/css.svg" alt="CSS">
+                                <h2>CSS</h2>
+                                <p>Challenge your understanding of CSS, the language used for styling web pages.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="jsQuiz.html">
+                        <div class="quiz hoverable">
+                            <div>
+                                <img src="assets/js.svg" alt="JavaScript">
+                                <h2>JavaScript</h2>
+                                <p>Assess your skills in JavaScript, the scripting language that powers dynamic web
+                                    content.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <div id="card1" class="quiz">
+                        <div>
+                            <img src="assets/node.svg" alt="Node.js">
+                            <h2>Node.js</h2>
+                            <p>Test your knowledge of Node.js, the server-side JavaScript runtime environment.</p>
+                        </div>
+                        <span class="constraints" id="constraint_1" style="display: none;">Score 10/10 in JavaScript to
+                            unlock Node.js</span>
+                        <i class="ri-lock-2-line lock-icon" onmouseleave="toUnlockLeave1()"
+                            onmouseenter="toUnlock1()"></i>
+                    </div>
+                    <div id="card2" class="quiz">
+                        <div>
+                            <img style="border-radius: 3px;" src="assets/ts.svg" alt="TypeScript">
+                            <h2>TypeScript</h2>
+                            <p>Evaluate your grasp of TypeScript, the strongly-typed superset of JavaScript.</p>
+                        </div>
+                        <span class="constraints" id="constraint_2" style="display: none;">Score 10/10 in Node.js to
+                            unlock TypeScript</span>
+                        <i class="ri-lock-2-line lock-icon" onmouseleave="toUnlockLeave2()"
+                            onmouseenter="toUnlock2()"></i>
+                    </div>
+                    <div id="card3" class="quiz">
+                        <div>
+                            <img src="assets/python.svg" alt="Python">
+                            <h2>Python</h2>
+                            <p>See how well you know Python, used for web development, data analysis, and more.</p>
+                        </div>
+                        <span class="constraints" id="constraint_3" style="display: none;">Score 10/10 in TypeScript to
+                            unlock Python</span>
+                        <i class="ri-lock-2-line lock-icon" onmouseleave="toUnlockLeave3()"
+                            onmouseenter="toUnlock3()"></i>
+                    </div>
+                    <div id="card4" class="quiz">
+                        <div>
+                            <img src="assets/react.svg" alt="React">
+                            <h2>React</h2>
+                            <p>Challenge yourself with React, the JavaScript library for building user interfaces.</p>
+                        </div>
+                        <span class="constraints" id="constraint_4" style="display: none;">Score 10/10 in Python to
+                            unlock React</span>
+                        <i class="ri-lock-2-line lock-icon" onmouseleave="toUnlockLeave4()"
+                            onmouseenter="toUnlock4()"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var card1 = document.querySelector("#card1 div");
+        var card2 = document.querySelector("#card2 div");
+        var card3 = document.querySelector("#card3 div");
+        var card4 = document.querySelector("#card4 div");
+
+        function toUnlock1() {
+            card1.style.display = "none";
+            constraint_1.style.display = "flex";
+        }
+
+        function toUnlockLeave1() {
+            card1.style.display = "flex";
+            constraint_1.style.display = "none";
+        }
+
+        function toUnlock2() {
+            card2.style.display = "none";
+            constraint_2.style.display = "flex";
+        }
+
+        function toUnlockLeave2() {
+            card2.style.display = "flex";
+            constraint_2.style.display = "none";
+        }
+
+        function toUnlock3() {
+            card3.style.display = "none";
+            constraint_3.style.display = "flex";
+        }
+
+        function toUnlockLeave3() {
+            card3.style.display = "flex";
+            constraint_3.style.display = "none";
+        }
+
+        function toUnlock4() {
+            card4.style.display = "none";
+            constraint_4.style.display = "flex";
+        }
+
+        function toUnlockLeave4() {
+            card4.style.display = "flex";
+            constraint_4.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

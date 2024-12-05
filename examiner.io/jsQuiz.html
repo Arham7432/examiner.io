@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/5691/5691365.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="examiner.css">
+    <title>examiner.io | JS Quiz</title>
+
+    <style>
+        #main {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quest-card {
+            height: 80%;
+            border-radius: 12px;
+            width: 40%;
+            overflow: hidden;
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #head {
+            height: 10%;
+            display: flex;
+            align-items: center;
+            padding: 0px 18px;
+            font-size: 30px;
+            font-weight: 800;
+            padding-top: 12px;
+            justify-content: space-between;
+        }
+
+        #head h1 {
+            display: flex;
+            gap: 12px;
+        }
+
+        #head h1 img {
+            width: 25px;
+        }
+
+        #timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.297);
+            border-radius: 50%;
+            cursor: default;
+        }
+
+        .question {
+            padding: 10px 20px;
+            color: gray;
+            display: flex;
+        }
+
+        .opt-cont {
+            margin: 25px;
+        }
+
+        .opt-cont .option {
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 5px;
+            background: rgb(26, 26, 26);
+            cursor: pointer;
+        }
+
+        .opt-cont .option:hover {
+            background: rgb(47, 47, 47);
+        }
+
+        .opt-cont .option:active {
+            background: rgb(34, 34, 34);
+        }
+
+        .correct {
+            transition: all 0.2s;
+            background-color: rgba(0, 128, 0, 0.393) !important;
+        }
+
+        .incorrect {
+            transition: all 0.2s;
+            background-color: rgba(255, 3, 3, 0.399) !important;
+        }
+
+        #lastBtn {
+            font-weight: 700;
+            background: #80808024;
+            border-radius: 32px;
+            padding: 9px 20px;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        #lastBtn:hover {
+            background-color: #8080805a;
+        }
+
+        #lastBtn:active {
+            background-color: #8080803f;
+        }
+
+        #qC {
+            text-align: left;
+            font-size: 8vw;
+            font-weight: 600;
+            color: #dfe1e6;
+            cursor: default;
+        }
+
+        #lastP {
+            color: dimgray;
+            font-size: 25px;
+            font-weight: 600;
+            font-family: montserrat;
+            cursor: default;
+        }
+
+        @media screen and (min-width:1600px) {
+
+            #main {
+                width: 70%;
+                margin: auto;
+            }
+
+            header {
+                padding: 20px 15vw;
+            }
+
+        }
+
+        @media screen and (max-width:600px) {
+            .quest-card {
+                width: 85%;
+                height: auto;
+                margin-top: 0;
+            }
+
+            #qC {
+                line-height: 1.1;
+                font-size: 8vh;
+                margin: 30px;
+            }
+
+            #lastP {
+                font-weight: 600;
+                font-size: 17px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <h2 style="cursor: pointer;">EXAMINER.<span style="font-weight: 400;">IO</span></h2>
+        </a>
+        <a target="_blank" href="https://github.com/Arham7432">
+            <div class="group relative">
+                <button>
+                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"
+                        fill="none" viewBox="0 0 24 24" class="w-8 hover:scale-125 duration-200 hover:stroke-blue-500">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </a>
+    </header>
+    <div id="main">
+        <div class="quest-card">
+            <div id="head">
+                <h1><img src="assets/js.svg">Question:</h1>
+                <div id="timer">60</div>
+            </div>
+
+            <div class="question">
+                Loading Question...
+            </div>
+
+            <div class="opt-cont">
+                <div class="option">Option 1</div>
+                <div class="option">Option 2</div>
+                <div class="option">Option 3</div>
+                <div class="option">Option 4</div>
+            </div>
+
+            <p id="questions-left" style="text-align: end;">Questions Left: X</p>
+        </div>
+    </div>
+
+    <script>
+        var jsQuestions = [
+            {
+                question: "What does 'DOM' stand for in JavaScript?",
+                options: [
+                    "Document Object Model",
+                    "Data Object Management",
+                    "Document Oriented Module",
+                    "Data Oriented Model"
+                ],
+                correctAnswer: "Document Object Model"
+            },
+            {
+                question: "Which keyword is used to declare a variable in JavaScript?",
+                options: [
+                    "var",
+                    "let",
+                    "const",
+                    "All of the above"
+                ],
+                correctAnswer: "All of the above"
+            },
+            {
+                question: "What is the correct syntax for a function declaration in JavaScript?",
+                options: [
+                    "function myFunction() {}",
+                    "def myFunction() {}",
+                    "func myFunction() {}",
+                    "method myFunction() {}"
+                ],
+                correctAnswer: "function myFunction() {}"
+            },
+            {
+                question: "What is the purpose of the `this` keyword in JavaScript?",
+                options: [
+                    "It refers to the current object.",
+                    "It refers to a global variable.",
+                    "It refers to a function argument.",
+                    "It refers to a local variable."
+                ],
+                correctAnswer: "It refers to the current object."
+            },
+            {
+                question: "Which method can be used to join array elements into a string?",
+                options: [
+                    "join()",
+                    "concat()",
+                    "split()",
+                    "toString()"
+                ],
+                correctAnswer: "join()"
+            },
+            {
+                question: "How can you check if a variable `x` is an array in JavaScript?",
+                options: [
+                    "Array.isArray(x)",
+                    "typeof x === 'array'",
+                    "x instanceof Array",
+                    "Both A and C"
+                ],
+                correctAnswer: "Both A and C"
+            },
+            {
+                question: "What is the output of `console.log(typeof NaN)`?",
+                options: [
+                    "number",
+                    "NaN",
+                    "undefined",
+                    "object"
+                ],
+                correctAnswer: "number"
+            },
+            {
+                question: "Which method is used to add one or more elements to the end of an array?",
+                options: [
+                    "push()",
+                    "append()",
+                    "add()",
+                    "concat()"
+                ],
+                correctAnswer: "push()"
+            },
+            {
+                question: "What is a 'closure' in JavaScript?",
+                options: [
+                    "A combination of a function and its lexical environment",
+                    "A function that executes immediately after being defined",
+                    "A feature that blocks external code from accessing internal variables",
+                    "An error handling mechanism"
+                ],
+                correctAnswer: "A combination of a function and its lexical environment"
+            },
+            {
+                question: "What will the following code output?\n```javascript\nvar a = [1, 2, 3];\nvar b = [1, 2, 3];\nconsole.log(a == b, a === b);\n```",
+                options: [
+                    "true true",
+                    "false true",
+                    "true false",
+                    "false false"
+                ],
+                correctAnswer: "false false"
+            }
+        ];
+
+        var currentQuestionIndex = 0;
+        var score = 0;
+
+        var questionEl = document.querySelector(".question");
+        var optionsEl = document.querySelectorAll(".option");
+        var timerEl = document.getElementById("timer");
+        var mainEl = document.getElementById("main");
+        var questionsLeftEl = document.getElementById("questions-left");
+
+        var timerInterval;
+
+        function loadQuestion(index) {
+            var question = jsQuestions[index];
+            questionEl.textContent = `${index + 1}. ${question.question}`;
+            optionsEl.forEach((option, i) => {
+                option.textContent = `${String.fromCharCode(97 + i)}) ${question.options[i]}`;
+                option.classList.remove("correct", "incorrect", "disabled");
+                option.onclick = () => selectOption(option, question.correctAnswer);
+            });
+            questionsLeftEl.textContent = `Questions Left: ${jsQuestions.length - index}`;
+            resetTimer();
+        }
+
+        function selectOption(option, correctAnswer) {
+            optionsEl.forEach(opt => opt.classList.add("disabled"));
+            if (option.textContent.includes(correctAnswer)) {
+                option.classList.add("correct");
+                score++;
+            } else {
+                option.classList.add("incorrect");
+            }
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < jsQuestions.length) {
+                    loadQuestion(currentQuestionIndex);
+                } else {
+                    displayResults();
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            var timeLeft = 25;
+            timerEl.textContent = timeLeft;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < jsQuestions.length) {
+                        loadQuestion(currentQuestionIndex);
+                    } else {
+                        displayResults();
+                    }
+                }
+            }, 1000);
+        }
+
+        function displayResults() {
+            clearInterval(timerInterval);
+            mainEl.innerHTML = `
+                <div style="text-align: center;">
+                    <h1 id="qC">Quiz Completed!</h1>
+                    <p id="lastP">You answered ${score} out of ${jsQuestions.length} questions correctly.</p>
+                    <button id="lastBtn" onclick="goToCategories()">Back to Dashboard</button>
+                </div>
+            `;
+        }
+
+        function goToCategories() {
+            window.location.href = "category.html";
+        }
+
+        loadQuestion(currentQuestionIndex);
+    </script>
+</body>
+
+</html>l>
